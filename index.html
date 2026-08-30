@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The AiGPT Book — 500 AI Photo Prompts</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;0,900;1,600&family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0a0a09;
+    --bg-soft:#121210;
+    --card:#161513;
+    --card-line:#2a2620;
+    --gold:#cda343;
+    --gold-light:#f0d78c;
+    --gold-dim:#8a712f;
+    --cream:#f2ede0;
+    --muted:#9a958a;
+    --danger:#c85a4f;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--cream);
+    font-family:'Inter',sans-serif;
+    overflow-x:hidden;
+  }
+  img{max-width:100%;display:block;}
+  .gold-text{
+    background:linear-gradient(120deg,#8a712f 0%,#f0d78c 35%,#cda343 55%,#f0d78c 75%,#8a712f 100%);
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+    background-size:250% 100%;
+    animation:shimmer 6s linear infinite;
+  }
+  @keyframes shimmer{
+    0%{background-position:0% 0;}
+    100%{background-position:250% 0;}
+  }
+  .display{font-family:'Playfair Display',serif;}
+  .label{
+    font-family:'Oswald',sans-serif;
+    letter-spacing:0.18em;
+    text-transform:uppercase;
+  }
+  .wrap{
+    max-width:1180px;
+    margin:0 auto;
+    padding:0 24px;
+  }
+
+  /* ---------- NAV ---------- */
+  header.nav{
+    position:fixed;top:0;left:0;right:0;
+    z-index:100;
+    background:rgba(10,10,9,0.85);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--card-line);
+  }
+  .nav-inner{
+    max-width:1180px;margin:0 auto;padding:16px 24px;
+    display:flex;align-items:center;justify-content:space-between;
+  }
+  .logo{
+    font-family:'Oswald',sans-serif;
+    font-weight:700;
+    font-size:22px;
+    letter-spacing:0.05em;
+    display:flex;align-items:center;gap:8px;
+  }
+  .logo-mark{
+    width:30px;height:30px;
+    border:1.5px solid var(--gold);
+    border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    font-size:14px;color:var(--gold);
+  }
+  .nav-links{
+    display:flex;gap:32px;
+    font-family:'Oswald',sans-serif;
+    font-size:13px;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    color:var(--muted);
+  }
+  .nav-links a{color:var(--muted);text-decoration:none;transition:color .25s;}
+  .nav-links a:hover{color:var(--gold-light);}
+  .nav-cta{
+    display:inline-block;
+    padding:10px 20px;
+    border:1px solid var(--gold);
+    color:var(--gold-light);
+    font-family:'Oswald',sans-serif;
+    font-size:12px;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    text-decoration:none;
+    border-radius:2px;
+    transition:all .25s;
+  }
+  .nav-cta:hover{background:var(--gold);color:#0a0a09;}
+  .burger{display:none;background:none;border:none;color:var(--cream);font-size:24px;cursor:pointer;}
+
+  /* ---------- FLOATING RIGHT CTA ---------- */
+  .side-cta{
+    position:fixed;
+    right:0;
+    top:50%;
+    transform:translateY(-50%) rotate(0deg);
+    z-index:90;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+  }
+  .side-cta a{
+    writing-mode:vertical-rl;
+    text-orientation:mixed;
+    background:var(--gold);
+    color:#0a0a09;
+    font-family:'Oswald',sans-serif;
+    font-weight:600;
+    font-size:14px;
+    letter-spacing:0.15em;
+    text-transform:uppercase;
+    text-decoration:none;
+    padding:22px 10px;
+    border-radius:6px 0 0 6px;
+    box-shadow:-4px 4px 18px rgba(0,0,0,0.45);
+    transition:padding .25s, background .25s;
+  }
+  .side-cta a:hover{padding-right:16px;background:var(--gold-light);}
+  @media(max-width:720px){
+    .side-cta{display:none;}
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    padding:150px 0 90px;
+    position:relative;
+    background:
+      radial-gradient(ellipse 900px 500px at 80% 0%, rgba(205,163,67,0.10), transparent 60%),
+      radial-gradient(ellipse 700px 500px at 0% 100%, rgba(205,163,67,0.06), transparent 60%);
+  }
+  .hero-inner{
+    display:grid;
+    grid-template-columns:1.05fr 0.95fr;
+    gap:60px;
+    align-items:center;
+  }
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:10px;
+    font-family:'Oswald',sans-serif;
+    font-size:12px;letter-spacing:0.2em;text-transform:uppercase;
+    color:var(--gold-light);
+    margin-bottom:22px;
+  }
+  .eyebrow::before{content:'';width:26px;height:1px;background:var(--gold);}
+  .hero h1{
+    font-size:56px;
+    line-height:1.08;
+    font-weight:900;
+    margin-bottom:22px;
+  }
+  .hero h1 em{font-style:italic;font-weight:500;}
+  .hero p.sub{
+    font-size:17px;
+    color:var(--muted);
+    line-height:1.7;
+    max-width:480px;
+    margin-bottom:30px;
+  }
+  .hero p.sub b{color:var(--cream);font-weight:600;}
+
+  .price-row{
+    display:flex;align-items:center;gap:18px;
+    margin-bottom:30px;
+    flex-wrap:wrap;
+  }
+  .price-old{
+    font-family:'Oswald',sans-serif;
+    font-size:22px;
+    color:var(--muted);
+    text-decoration:line-through;
+    text-decoration-color:var(--danger);
+  }
+  .price-new{
+    font-family:'Playfair Display',serif;
+    font-weight:900;
+    font-size:44px;
+    color:var(--gold-light);
+  }
+  .price-badge{
+    background:var(--danger);
+    color:#fff;
+    font-family:'Oswald',sans-serif;
+    font-size:12px;
+    letter-spacing:0.05em;
+    padding:5px 10px;
+    border-radius:3px;
+  }
+
+  .btn-primary{
+    display:inline-flex;align-items:center;gap:10px;
+    background:linear-gradient(120deg,var(--gold-dim),var(--gold-light),var(--gold-dim));
+    background-size:220% 100%;
+    color:#0a0a09;
+    font-family:'Oswald',sans-serif;
+    font-weight:600;
+    font-size:15px;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    text-decoration:none;
+    padding:17px 34px;
+    border-radius:3px;
+    transition:background-position .5s ease, transform .2s ease;
+    box-shadow:0 10px 30px rgba(205,163,67,0.18);
+  }
+  .btn-primary:hover{background-position:100% 0;transform:translateY(-2px);}
+  .btn-primary .arrow{transition:transform .25s;}
+  .btn-primary:hover .arrow{transform:translateX(4px);}
+
+  .trust-row{
+    display:flex;gap:26px;
+    margin-top:34px;
+    flex-wrap:wrap;
+  }
+  .trust-item{
+    display:flex;align-items:center;gap:8px;
+    font-size:13px;color:var(--muted);
+  }
+  .trust-item .dot{width:6px;height:6px;border-radius:50%;background:var(--gold);}
+
+  .hero-visual{
+    position:relative;
+    display:flex;justify-content:center;
+  }
+  .hero-visual img{
+    max-width:400px;
+    filter:drop-shadow(0 40px 60px rgba(0,0,0,0.55));
+    animation:float 6s ease-in-out infinite;
+  }
+  @keyframes float{
+    0%,100%{transform:translateY(0);}
+    50%{transform:translateY(-14px);}
+  }
+  .glow-ring{
+    position:absolute;
+    width:420px;height:420px;
+    border-radius:50%;
+    background:radial-gradient(circle,rgba(205,163,67,0.18),transparent 70%);
+    top:50%;left:50%;
+    transform:translate(-50%,-50%);
+    z-index:0;
+  }
+
+  /* ---------- CATEGORY STRIP ---------- */
+  .cat-strip{
+    border-top:1px solid var(--card-line);
+    border-bottom:1px solid var(--card-line);
+    padding:26px 0;
+    background:var(--bg-soft);
+  }
+  .cat-strip-inner{
+    display:flex;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:20px 10px;
+  }
+  .cat-chip{
+    display:flex;align-items:center;gap:9px;
+    font-family:'Oswald',sans-serif;
+    font-size:13px;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:var(--muted);
+  }
+  .cat-chip .ic{color:var(--gold);font-size:16px;}
+
+  /* ---------- SECTION SHARED ---------- */
+  section{padding:100px 0;}
+  .sec-head{
+    text-align:center;
+    max-width:640px;
+    margin:0 auto 60px;
+  }
+  .sec-eyebrow{
+    font-family:'Oswald',sans-serif;
+    font-size:12px;letter-spacing:0.2em;text-transform:uppercase;
+    color:var(--gold);
+    margin-bottom:14px;
+  }
+  .sec-head h2{
+    font-family:'Playfair Display',serif;
+    font-weight:700;
+    font-size:38px;
+    line-height:1.25;
+    margin-bottom:16px;
+  }
+  .sec-head p{color:var(--muted);font-size:16px;line-height:1.7;}
+
+  /* ---------- ABOUT / WHAT'S INSIDE ---------- */
+  .about-grid{
+    display:grid;
+    grid-template-columns:0.85fr 1.15fr;
+    gap:60px;
+    align-items:center;
+  }
+  .about-grid img{
+    border-radius:6px;
+    box-shadow:0 30px 60px rgba(0,0,0,0.5);
+  }
+  .toc-list{
+    list-style:none;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:0;
+  }
+  .toc-list li{
+    display:flex;gap:14px;
+    padding:14px 12px;
+    border-bottom:1px solid var(--card-line);
+    font-size:14.5px;
+    color:var(--cream);
+    align-items:baseline;
+  }
+  .toc-num{
+    font-family:'Playfair Display',serif;
+    color:var(--gold);
+    font-weight:700;
+    font-size:15px;
+    min-width:24px;
+  }
+  .toc-list li span.t{color:var(--muted);}
+
+  /* ---------- PROMPT PREVIEW ---------- */
+  .prompt-card{
+    background:var(--card);
+    border:1px solid var(--card-line);
+    border-radius:8px;
+    padding:32px;
+    position:relative;
+    overflow:hidden;
+  }
+  .prompt-card::before{
+    content:'“';
+    position:absolute;
+    top:-10px;right:20px;
+    font-family:'Playfair Display',serif;
+    font-size:140px;
+    color:rgba(205,163,67,0.08);
+    line-height:1;
+  }
+  .prompt-tag{
+    display:inline-block;
+    font-family:'Oswald',sans-serif;
+    font-size:11px;
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+    color:#0a0a09;
+    background:var(--gold);
+    padding:5px 10px;
+    border-radius:3px;
+    margin-bottom:16px;
+  }
+  .prompt-card p{
+    font-size:15.5px;
+    line-height:1.85;
+    color:#d9d4c6;
+  }
+  .prompt-meta{
+    display:flex;gap:24px;
+    margin-top:20px;
+    font-family:'Oswald',sans-serif;
+    font-size:12px;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:var(--muted);
+  }
+  .prompt-meta b{color:var(--gold-light);font-weight:600;}
+  .prompt-cols{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:26px;
+  }
+
+  /* ---------- GALLERY ---------- */
+  .gallery-grid{
+    columns:4 260px;
+    column-gap:20px;
+  }
+  .gallery-item{
+    break-inside:avoid;
+    margin-bottom:20px;
+    position:relative;
+    border-radius:8px;
+    overflow:hidden;
+    border:1px solid var(--card-line);
+    background:var(--card);
+  }
+  .gallery-item img{
+    width:100%;
+    display:block;
+    transition:transform .5s ease;
+  }
+  .gallery-item:hover img{transform:scale(1.045);}
+  .gallery-cap{
+    position:absolute;
+    left:0;right:0;bottom:0;
+    padding:16px 14px 12px;
+    background:linear-gradient(0deg, rgba(0,0,0,0.85), transparent);
+    opacity:0;
+    transition:opacity .3s ease;
+  }
+  .gallery-item:hover .gallery-cap{opacity:1;}
+  .gallery-cap span{
+    font-family:'Oswald',sans-serif;
+    font-size:11px;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    color:var(--gold-light);
+  }
+  .gallery-note{
+    text-align:center;
+    color:var(--muted);
+    font-size:13px;
+    margin-top:36px;
+  }
+  @media(max-width:900px){
+    .gallery-grid{columns:2 180px;}
+  }
+  @media(max-width:480px){
+    .gallery-grid{columns:2 140px;column-gap:12px;}
+    .gallery-item{margin-bottom:12px;}
+  }
+
+  /* ---------- WHY / BENEFITS ---------- */
+  .benefits{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:28px;
+  }
+  .benefit-card{
+    background:var(--card);
+    border:1px solid var(--card-line);
+    padding:34px 28px;
+    border-radius:8px;
+    transition:border-color .3s, transform .3s;
+  }
+  .benefit-card:hover{border-color:var(--gold-dim);transform:translateY(-4px);}
+  .benefit-num{
+    font-family:'Playfair Display',serif;
+    font-size:16px;
+    color:var(--gold);
+    margin-bottom:16px;
+  }
+  .benefit-card h3{
+    font-size:18px;
+    margin-bottom:10px;
+    font-weight:600;
+  }
+  .benefit-card p{font-size:14px;color:var(--muted);line-height:1.7;}
+
+  /* ---------- FINAL CTA / PRICE ---------- */
+  .final-cta{
+    background:var(--bg-soft);
+    border-top:1px solid var(--card-line);
+    border-bottom:1px solid var(--card-line);
+    position:relative;
+    overflow:hidden;
+  }
+  .final-cta::before{
+    content:'';
+    position:absolute;inset:0;
+    background:radial-gradient(ellipse 700px 400px at 50% 0%, rgba(205,163,67,0.12), transparent 65%);
+  }
+  .final-inner{
+    position:relative;z-index:1;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    text-align:center;
+  }
+  .final-inner img{
+    max-width:230px;
+    margin-bottom:36px;
+    filter:drop-shadow(0 24px 40px rgba(0,0,0,0.5));
+  }
+  .final-inner h2{
+    font-family:'Playfair Display',serif;
+    font-size:34px;
+    margin-bottom:18px;
+    max-width:560px;
+  }
+  .final-price-row{
+    display:flex;align-items:baseline;gap:16px;
+    margin:20px 0 8px;
+  }
+  .final-price-row .price-old{font-size:24px;}
+  .final-price-row .price-new{font-size:52px;}
+  .save-note{
+    color:var(--muted);
+    font-size:13px;
+    margin-bottom:30px;
+    font-family:'Oswald',sans-serif;
+    letter-spacing:0.05em;
+  }
+  .save-note b{color:var(--gold-light);}
+
+  /* ---------- FOOTER ---------- */
+  footer{
+    padding:50px 0 30px;
+    text-align:center;
+  }
+  footer .logo{justify-content:center;margin-bottom:16px;}
+  footer p{color:var(--muted);font-size:13px;margin-bottom:6px;}
+  footer .foot-links{
+    margin-top:18px;
+    display:flex;gap:22px;justify-content:center;
+    font-family:'Oswald',sans-serif;
+    font-size:12px;letter-spacing:0.08em;text-transform:uppercase;
+  }
+  footer .foot-links a{color:var(--muted);text-decoration:none;}
+  footer .foot-links a:hover{color:var(--gold-light);}
+
+  /* ---------- MOBILE ---------- */
+  @media(max-width:900px){
+    .hero-inner{grid-template-columns:1fr;gap:50px;}
+    .hero{padding-top:120px;text-align:center;}
+    .hero p.sub{margin:0 auto 30px;}
+    .price-row{justify-content:center;}
+    .hero-visual{order:-1;}
+    .trust-row{justify-content:center;}
+    .about-grid{grid-template-columns:1fr;}
+    .toc-list{grid-template-columns:1fr;}
+    .benefits{grid-template-columns:1fr;}
+    .prompt-cols{grid-template-columns:1fr;}
+    .nav-links{display:none;}
+    .hero h1{font-size:38px;}
+    .sec-head h2{font-size:28px;}
+    section{padding:70px 0;}
+  }
+  @media(max-width:480px){
+    .price-new{font-size:34px;}
+    .final-price-row .price-new{font-size:38px;}
+    .cat-strip-inner{justify-content:flex-start;}
+    .btn-primary{width:100%;justify-content:center;}
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<header class="nav">
+  <div class="nav-inner">
+    <div class="logo"><span class="logo-mark">A</span><span>The <span class="gold-text">AiGPT</span></span></div>
+    <nav class="nav-links">
+      <a href="#inside">Inside the Book</a>
+      <a href="#preview">Sample Prompts</a>
+      <a href="#gallery">Results</a>
+      <a href="#why">Kyu Le</a>
+    </nav>
+    <a href="#" class="nav-cta">Get eBook</a>
+  </div>
+</header>
+
+<!-- FLOATING RIGHT SIDE CTA -->
+<div class="side-cta">
+  <a href="#">Get This eBook →</a>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap hero-inner">
+    <div class="hero-copy">
+      <div class="eyebrow">A Premium Visual Prompt Library</div>
+      <h1>500 AI Photo Prompts. <br><em class="gold-text">Copy. Paste.</em> Create.</h1>
+      <p class="sub">From Portraits to Sci-Fi — <b>8 categories</b> and <b>500 ready-made prompts</b> that work with any professional AI image generator. Just copy, paste, and create stunning, magazine-quality photos — no design skills needed.</p>
+
+      <div class="price-row">
+        <span class="price-old">₹199</span>
+        <span class="price-new">₹89</span>
+        <span class="price-badge">55% OFF</span>
+      </div>
+
+      <a href="#" class="btn-primary">Buy Book <span class="arrow">→</span></a>
+
+      <div class="trust-row">
+        <div class="trust-item"><span class="dot"></span> Instant PDF Download</div>
+        <div class="trust-item"><span class="dot"></span> 500 Ready Prompts</div>
+        <div class="trust-item"><span class="dot"></span> Lifetime Access</div>
+      </div>
+    </div>
+
+    <div class="hero-visual">
+      <div class="glow-ring"></div>
+      <img src="cover-angled.png" alt="The AiGPT Book cover">
+    </div>
+  </div>
+</section>
+
+<!-- CATEGORY STRIP -->
+<div class="cat-strip">
+  <div class="wrap cat-strip-inner">
+    <div class="cat-chip"><span class="ic">◆</span>Portrait</div>
+    <div class="cat-chip"><span class="ic">◆</span>Cinematic</div>
+    <div class="cat-chip"><span class="ic">◆</span>Travel</div>
+    <div class="cat-chip"><span class="ic">◆</span>Fashion</div>
+    <div class="cat-chip"><span class="ic">◆</span>Automotive</div>
+    <div class="cat-chip"><span class="ic">◆</span>Product</div>
+    <div class="cat-chip"><span class="ic">◆</span>Fantasy</div>
+    <div class="cat-chip"><span class="ic">◆</span>Sci-Fi</div>
+  </div>
+</div>
+
+<!-- ABOUT / INSIDE THE BOOK -->
+<section id="inside">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-eyebrow">Kitab Ke Andar</div>
+      <h2>Ek Kitab, <span class="gold-text">Poori Prompt Library</span></h2>
+      <p>261 pages me phaila hua, "The AiGPT Book" har genre cover karta hai — taaki aap kabhi bhi "kya likhu prompt me" soch me atke na rahein.</p>
+    </div>
+
+    <div class="about-grid">
+      <img src="cover-3d.png" alt="The AiGPT Book on a desk">
+      <ul class="toc-list">
+        <li><span class="toc-num">01</span><span class="t">AI Image Generation ka Introduction</span></li>
+        <li><span class="toc-num">02</span><span class="t">Perfect AI Prompt Likhne ka Tareeka</span></li>
+        <li><span class="toc-num">03</span><span class="t">Portrait Photography Prompts</span></li>
+        <li><span class="toc-num">04</span><span class="t">Cinematic & Film Style Prompts</span></li>
+        <li><span class="toc-num">05</span><span class="t">Nature & Landscape Prompts</span></li>
+        <li><span class="toc-num">06</span><span class="t">Travel & Adventure Prompts</span></li>
+        <li><span class="toc-num">07</span><span class="t">Urban & Street Photography</span></li>
+        <li><span class="toc-num">08</span><span class="t">Fashion & Model Photography</span></li>
+        <li><span class="toc-num">09</span><span class="t">Couple & Relationship Shoots</span></li>
+        <li><span class="toc-num">10</span><span class="t">Men's & Women's Photoshoot</span></li>
+        <li><span class="toc-num">11</span><span class="t">Bike & Car Photography</span></li>
+        <li><span class="toc-num">12</span><span class="t">Product Photography</span></li>
+        <li><span class="toc-num">13</span><span class="t">Architecture & Interior</span></li>
+        <li><span class="toc-num">14</span><span class="t">Food Photography</span></li>
+        <li><span class="toc-num">15</span><span class="t">Fantasy & Surreal Worlds</span></li>
+        <li><span class="toc-num">16</span><span class="t">Sci-Fi & Futuristic Scenes</span></li>
+        <li><span class="toc-num">17</span><span class="t">Festival & Cultural Shoots</span></li>
+        <li><span class="toc-num">18</span><span class="t">Abstract & Concept Art</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- SAMPLE PROMPTS -->
+<section id="preview" style="background:var(--bg-soft);border-top:1px solid var(--card-line);border-bottom:1px solid var(--card-line);">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-eyebrow">A Glimpse</div>
+      <h2>How does it look? <span class="gold-text">A Prompt</span></h2>
+      <p>Every prompt is fully structured — subject, lighting, camera, mood, and finish are all defined. Just copy and paste it directly into your AI tool.</p>
+    </div>
+
+    <div class="prompt-cols">
+      <div class="prompt-card">
+        <span class="prompt-tag">Portrait · AI Foundations</span>
+        <p>"Create a thoughtful creative on a rain-slick city street, captured during spring. Use an 85mm portrait lens with shallow depth of field, soft diffused window light, and strong foreground framing with layered depth..."</p>
+        <div class="prompt-meta"><span>Aspect: <b>3:2</b></span><span>Style: <b>Film Still</b></span></div>
+      </div>
+      <div class="prompt-card">
+        <span class="prompt-tag">Cinematic · Professional</span>
+        <p>"Create a confident entrepreneur inside a luxury hotel, captured during late evening. Use a 70–200mm compressed perspective, misty dawn light, and rule-of-thirds placement with leading lines..."</p>
+        <div class="prompt-meta"><span>Aspect: <b>3:2</b></span><span>Style: <b>Magazine Finish</b></span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY / RESULTS -->
+<section id="gallery">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-eyebrow">Real Results</div>
+      <h2>With these prompts <span class="gold-text">Photos Taken</span></h2>
+      <p>All of this has been created using the prompts from this book — by real people, on real AI tools. Now it's your turn.</p>
+    </div>
+
+    <div class="gallery-grid">
+      <div class="gallery-item">
+        <img src="ex-01.png" alt="AI generated photo — nature loop concept">
+        <div class="gallery-cap"><span>Nature & Landscape Prompt</span></div>
+      </div>
+      <div class="gallery-item">
+        <img src="ex-02.png" alt="AI generated photo — product t-shirt shoot">
+        <div class="gallery-cap"><span>Product Photography Prompt</span></div>
+      </div>
+      <div class="gallery-item">
+        <img src="ex-03.jpg" alt="AI generated photo — travel portrait at Pavagadh">
+        <div class="gallery-cap"><span>Travel & Adventure Prompt</span></div>
+      </div>
+      <div class="gallery-item">
+        <img src="ex-04.jpg" alt="AI generated photo — double exposure portrait">
+        <div class="gallery-cap"><span>Cinematic Prompt</span></div>
+      </div>
+      <div class="gallery-item">
+        <img src="ex-05.png" alt="AI generated photo — travel train portrait">
+        <div class="gallery-cap"><span>Travel & Adventure Prompt</span></div>
+      </div>
+      <div class="gallery-item">
+        <img src="ex-06.jpg" alt="AI generated photo — urban street portrait">
+        <div class="gallery-cap"><span>Urban & Street Prompt</span></div>
+      </div>
+      <div class="gallery-item">
+        <img src="ex-07.jpg" alt="AI generated photo — stylised portrait poster">
+        <div class="gallery-cap"><span>Men's Photoshoot Prompt</span></div>
+      </div>
+      <div class="gallery-item">
+        <img src="ex-08.png" alt="AI generated photo — moody portrait">
+        <div class="gallery-cap"><span>Portrait Photography Prompt</span></div>
+      </div>
+      <div class="gallery-item">
+        <img src="ex-09.jpg" alt="AI generated photo — moody portrait">
+        <div class="gallery-cap"><span>Portrait Photography Prompt</span></div>
+      </div>
+      <div class="gallery-item">
+        <img src="ex-10.jpg" alt="AI generated photo — moody portrait">
+        <div class="gallery-cap"><span>Portrait Photography Prompt</span></div>
+      </div>
+      <div class="gallery-item">
+        <img src="ex-11.jpg" alt="AI generated photo — moody portrait">
+        <div class="gallery-cap"><span>Portrait Photography Prompt</span></div>
+      </div>
+    </div>
+
+    <p class="gallery-note">Every photo in this book has been generated using the copy-paste prompts given inside.</p>
+  </div>
+</section>
+
+<!-- WHY THIS BOOK -->
+<section id="why">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-eyebrow">Why buy this book?</div>
+      <h2>This book <span class="gold-text">Why does it work?</span></h2>
+      <p>No more fear of a blank page. These prompts are already test-structured so your results come out sharp and professional every time.</p>
+    </div>
+
+    <div class="benefits">
+      <div class="benefit-card">
+        <div class="benefit-num">Copy → Paste</div>
+        <h3>Zero Guesswork</h3>
+        <p>Every prompt is already written — subject, lighting, camera, and mood are all set. You just need to copy and paste.</p>
+      </div>
+      <div class="benefit-card">
+        <div class="benefit-num">8 Categories</div>
+        <h3>Wide Genre Coverage</h3>
+        <p>Portrait, fashion, automotive, fantasy, sci-fi and much more — you can find everything in one library.</p>
+      </div>
+      <div class="benefit-card">
+        <div class="benefit-num">Any Tool</div>
+        <h3>Universal Format</h3>
+        <p>Prompts work with any modern AI image generator — no lock-in.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final-cta">
+  <div class="wrap final-inner">
+    <img src="cover-front.png" alt="The AiGPT Book cover">
+    <h2>Your next stunning photo, <span class="gold-text">Just One Copy-Paste Away</span></h2>
+
+    <div class="final-price-row">
+      <span class="price-old">₹199</span>
+      <span class="price-new">₹89</span>
+    </div>
+    <div class="save-note">Limited time offer — <b>₹110 bachao</b> by ordering today itself</div>
+
+    <a href="#" class="btn-primary">Buy Book <span class="arrow">→</span></a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <div class="logo"><span class="logo-mark">A</span><span>The <span class="gold-text">AiGPT</span></span></div>
+    <p>The AiGPT Book — 500 AI Photo Prompts</p>
+    <p>Written by Shivam Sahani</p>
+    <div class="foot-links">
+      <a href="#inside">Inside the Book</a>
+      <a href="#preview">Sample Prompts</a>
+      <a href="#">Buy Now</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // mobile nav could be extended here; currently nav collapses via CSS.
+  // Smooth reveal on scroll for cards
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if(e.isIntersecting){
+        e.target.style.opacity = 1;
+        e.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, {threshold:0.15});
+
+  document.querySelectorAll('.benefit-card, .prompt-card, .toc-list li, .gallery-item').forEach(el => {
+    el.style.opacity = 0;
+    el.style.transform = 'translateY(16px)';
+    el.style.transition = 'opacity .6s ease, transform .6s ease';
+    observer.observe(el);
+  });
+</script>
+
+</body>
+</html>
